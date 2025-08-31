@@ -1,16 +1,20 @@
 package org.example;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class DadosMock {
-    List<String> nomes = new ArrayList<>();
-    List<String> emails = new ArrayList<>();
-    List<String> contas = new ArrayList<>();
-    List<String> senhas = new ArrayList<>();
-    List<Double> saldos = new ArrayList<>();
+    static List<String> nomes = new ArrayList<>();
+    static List<String> emails = new ArrayList<>();
+    static List<String> contas = new ArrayList<>();
+    static List<String> senhas = new ArrayList<>();
+    static List<Double> saldos = new ArrayList<>();
 
     public DadosMock() {
+        if (nomes.size() > 0){
+            return;
+        }
         nomes.add("jhoel");
         emails.add("jhoel@gmail.com");
         contas.add("68081000000");
@@ -45,7 +49,25 @@ public class DadosMock {
         contas.add(conta);
         senhas.add(senha);
         saldos.add(0.00);
-
+        System.out.println(emails);
+        System.out.println(senhas);
         return ("Conta Criada com sucesso seja bem-vindo(a)");
+    }
+    Integer validarUsuario(String email, String conta, String senha){
+        Integer indice = -1;
+        System.out.println(emails);
+        System.out.println(senhas);
+        if (email != null){
+            indice = emails.indexOf(email);
+        } else if ( conta != null) {
+            System.out.println(conta);
+            indice = contas.indexOf(conta);
+        }
+
+        if ( indice >=0 && senha.equals(senhas.get(indice))){
+            return indice;
+        }else {
+            return -1;
+        }
     }
 }

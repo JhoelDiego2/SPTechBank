@@ -2,10 +2,13 @@ package org.example;
 
 import java.util.Scanner;
 public class Menu {
-    void MenuInicial(){
+    Integer MenuInicial(){
         String linha = "-=====================================================================-";
         Scanner leitorTexto = new Scanner(System.in);
         Scanner leitorNumerico = new Scanner(System.in);
+        Cadastro cadastro = new Cadastro();
+        Login login = new Login();
+        Integer indiceUsuario = -1;
 
         System.out.println("""
                 ┌=====================================================================┐
@@ -18,7 +21,6 @@ public class Menu {
                 │                                                                     │
                 └=====================================================================┘
                 """);
-        Cadastro cadastro = new Cadastro();
         int opcao = 0;
 
         while(opcao !=3){
@@ -31,7 +33,8 @@ public class Menu {
 
             switch(opcao) {
                 case 1:
-                    break;
+                    indiceUsuario = login.menuLogin();
+                    return indiceUsuario;
                 case 2:
                     cadastro.registrar();
                     break;
@@ -42,6 +45,7 @@ public class Menu {
                     System.out.println("Digíte um valor válido!");
             }
         }
+        return -1;
     }
 }
 
