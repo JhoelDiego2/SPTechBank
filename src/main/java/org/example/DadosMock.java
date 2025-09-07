@@ -18,7 +18,7 @@ public class DadosMock {
         nomes.add("jhoel");
         emails.add("jhoel@gmail.com");
         contas.add("68081000000");
-        senhas.add("12345");
+        senhas.add("Jhoel$100");
         saldos.add(323.00);
     }
     String gerarNumeroConta(){

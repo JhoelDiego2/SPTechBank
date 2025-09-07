@@ -47,5 +47,33 @@ public class Menu {
         }
         return -1;
     }
+
+    void menuPrincipal(){
+        Scanner leitorNumerico = new Scanner(System.in);
+        System.out.println("""
+                ┌=====================================================================┐
+                │                                                                     │
+                │  █████ █████ ██████ █████ █████ ██ ██    █████ █████ ██  ██ ██  █   │
+                │  ██    ██ ██   ██   ██    ██    ██ ██    ██ ██ ██ ██ ███ ██ ██ █    │
+                │  █████ █████   ██   █████ ██    █████ ██ ████  █████ ██████ ███     │
+                │     ██ ██      ██   ██    ██    ██ ██    ██ ██ ██ ██ ██ ███ ██ █    │
+                │  █████ ██      ██   █████ █████ ██ ██    █████ ██ ██ ██  ██ ██  █   │
+                │                                                                     │
+                └=====================================================================┘
+                """);
+        int opcao = 0;
+
+        while(opcao !=3) {
+            System.out.println("1 - Ver Saldo");
+            System.out.println("2 - Ver historico de transferencias");
+            System.out.println("2 - Fazer uma transferencias");
+            System.out.println("2 - VER ");
+
+
+            System.out.println("3 - Sair");
+            opcao = leitorNumerico.nextInt();
+
+        }
+    }
 }
 
