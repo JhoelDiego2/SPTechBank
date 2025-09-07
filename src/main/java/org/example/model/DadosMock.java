@@ -1,4 +1,4 @@
-package org.example;
+package org.example.model;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -38,7 +38,7 @@ public class DadosMock {
         numeroContaOficial = String.valueOf(numeroConta);
         return numeroContaOficial;
     }
-    String cadastrarUsuario(String nome, String email,  String senha){
+    public String cadastrarUsuario(String nome, String email, String senha){
         int indice_email = emails.indexOf(email);
         if (indice_email != -1){
             return ("E-mail atualmente em uso faça o seu login.");
@@ -53,7 +53,7 @@ public class DadosMock {
         System.out.println(senhas);
         return ("Conta Criada com sucesso seja bem-vindo(a)");
     }
-    Integer validarUsuario(String email, String conta, String senha){
+    public Integer validarUsuario(String email, String conta, String senha){
         Integer indice = -1;
         System.out.println(emails);
         System.out.println(senhas);

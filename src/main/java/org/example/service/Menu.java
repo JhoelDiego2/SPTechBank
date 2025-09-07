@@ -1,8 +1,7 @@
-package org.example;
-
+package org.example.service;
 import java.util.Scanner;
 public class Menu {
-    Integer MenuInicial(){
+    public  Integer MenuInicial(){
         String linha = "-=====================================================================-";
         Scanner leitorTexto = new Scanner(System.in);
         Scanner leitorNumerico = new Scanner(System.in);
@@ -76,4 +75,5 @@ public class Menu {
         }
     }
 }
+
 

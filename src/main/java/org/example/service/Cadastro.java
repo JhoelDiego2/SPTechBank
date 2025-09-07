@@ -1,4 +1,7 @@
-package org.example;
+package org.example.service;
+
+import org.example.model.DadosMock;
+
 import java.util.Scanner;
 
 public class Cadastro {
