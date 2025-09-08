@@ -1,7 +1,7 @@
 package org.example.service;
 
-import org.example.util.Utils;
 import org.example.model.DadosMock;
+import org.example.util.Utils;
 
 import java.util.Scanner;
 

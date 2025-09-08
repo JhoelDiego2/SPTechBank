@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
+import org.example.transacao.Transacao;
 
 public class DadosMock {
     static List<String> nomes = new ArrayList<>();
@@ -10,6 +11,7 @@ public class DadosMock {
     static List<String> contas = new ArrayList<>();
     static List<String> senhas = new ArrayList<>();
     static List<Double> saldos = new ArrayList<>();
+    static List<List<Transacao>> historicoTransferencias = new ArrayList<>();
 
     public DadosMock() {
         if (nomes.size() > 0){
@@ -18,15 +20,16 @@ public class DadosMock {
         nomes.add("jhoel");
         emails.add("jhoel@gmail.com");
         contas.add("68081000000");
-        senhas.add("Jhoel$100");
+        senhas.add("12345");
         saldos.add(323.00);
+        historicoTransferencias.add(new ArrayList<>());
     }
     String gerarNumeroConta(){
         int numeroSpechBank = 6808;
         boolean numeroValido = false;
         String numeroContaOficial = "";
         int numeroConta = 0;
-        while (numeroValido == true) {
+        while (!numeroValido) {
             numeroConta = numeroSpechBank + ThreadLocalRandom.current().nextInt(10000, 99999);
             int indiceConta = contas.indexOf(numeroConta + "");
             if (indiceConta != -1) {
@@ -49,18 +52,16 @@ public class DadosMock {
         contas.add(conta);
         senhas.add(senha);
         saldos.add(0.00);
+        historicoTransferencias.add(new ArrayList<>());
         System.out.println(emails);
         System.out.println(senhas);
         return ("Conta Criada com sucesso seja bem-vindo(a)");
     }
     public Integer validarUsuario(String email, String conta, String senha){
         Integer indice = -1;
-        System.out.println(emails);
-        System.out.println(senhas);
-        if (email != null){
+        if (!email.isEmpty()){
             indice = emails.indexOf(email);
-        } else if ( conta != null) {
-            System.out.println(conta);
+        } else if (!conta.isEmpty()) {
             indice = contas.indexOf(conta);
         }
 
@@ -69,5 +70,42 @@ public class DadosMock {
         }else {
             return -1;
         }
+    }
+    public Double getSaldo(Integer indiceUsuario) {
+        return saldos.get(indiceUsuario);
+    }
+
+    public boolean fazerTransferencia(Integer indiceUsuario, String contaDestino, Double valor) {
+        if (saldos.get(indiceUsuario) < valor) {
+            return false;
+        }
+        int indiceDestino = contas.indexOf(contaDestino);
+        if (indiceDestino == -1) {
+            return false;
+        }
+        saldos.set(indiceUsuario, saldos.get(indiceUsuario) - valor);
+        saldos.set(indiceDestino, saldos.get(indiceDestino) + valor);
+
+        historicoTransferencias.get(indiceUsuario).add(new Transacao("Transferência para " + nomes.get(indiceDestino), -valor));
+        historicoTransferencias.get(indiceDestino).add(new Transacao("Recebido de " + nomes.get(indiceUsuario), valor));
+        return true;
+    }
+
+    public void adicionarSaldo(Integer indiceUsuario, double valor) {
+        saldos.set(indiceUsuario, saldos.get(indiceUsuario) + valor);
+        historicoTransferencias.get(indiceUsuario).add(new Transacao("Crédito por aposta ganha", valor));
+    }
+
+    public void removerSaldo(Integer indiceUsuario, double valor) {
+        saldos.set(indiceUsuario, saldos.get(indiceUsuario) - valor);
+        historicoTransferencias.get(indiceUsuario).add(new Transacao("Débito por aposta perdida", -valor));
+    }
+
+    public List<Transacao> getHistorico(Integer indiceUsuario) {
+        return historicoTransferencias.get(indiceUsuario);
+    }
+
+    public String getNome(Integer indiceUsuario) {
+        return nomes.get(indiceUsuario);
     }
 }
